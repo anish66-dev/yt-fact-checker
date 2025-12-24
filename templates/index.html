@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Fact Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 YouTube Fact Checker</h1>
+            <p class="subtitle">Verify claims in health & fitness videos with scientific evidence</p>
+            <p class="subtitle" style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">⚠️ Educational Use Only - Not Medical Advice</p>
+        </header>
+
+        <div class="input-section">
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="youtubeUrl" 
+                    placeholder="Paste YouTube video URL here..."
+                    autocomplete="off"
+                >
+                <button id="analyzeBtn" onclick="analyzeVideo()">
+                    <span id="btnText">Analyze Video</span>
+                    <span id="btnLoader" class="loader" style="display: none;"></span>
+                </button>
+            </div>
+            <p class="example-text">Example: https://www.youtube.com/watch?v=video_id</p>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyzing video... This may take 1-2 minutes</p>
+            <p class="loading-step" id="loadingStep">Extracting transcript...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="results" class="results" style="display: none;">
+            <div class="stats">
+                <div class="stat-card">
+                    <h3 id="totalClaims">0</h3>
+                    <p>Claims Found</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="supported">0</h3>
+                    <p>Supported</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="contradicted">0</h3>
+                    <p>Refuted</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="insufficient">0</h3>
+                    <p>Inconclusive</p>
+                </div>
+            </div>
+
+            <div id="claimsList" class="claims-list"></div>
+            
+            <div class="disclaimer">
+                <h4>⚠️ Important Disclaimer</h4>
+                <ul>
+                    <li>This tool is for <strong>educational purposes only</strong></li>
+                    <li>Results should <strong>NOT</strong> be used for medical decisions</li>
+                    <li>Always consult qualified professionals for health advice</li>
+                    <li>Evidence is based on article titles only, not full paper analysis</li>
+                    <li>Classification accuracy is limited by available sources</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
